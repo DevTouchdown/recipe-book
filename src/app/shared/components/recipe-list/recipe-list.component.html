@@ -1,0 +1,25 @@
+<div class="container mt-4" [ngSwitch]="recipes && recipes.length > 0">
+  <ng-container *ngSwitchCase="true">
+    <div class="card mb-2" *ngFor="let recipe of recipes">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8 my-auto">
+            <span scope="row">{{ recipe.title }}</span>
+          </div>
+          <div class="col-4 my-auto">
+            <a [href]="recipe.href" target="_blank">
+              <img class="details-eye float-right" src="../../../../assets/images/layout/eye.png">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="false">
+    <div class="card mb-2" *ngSwitchCase="false">
+      <div class="card-body">
+        <span scope="row" class="align-middle">Nothing to see here!</span>
+      </div>
+    </div>
+  </ng-container>
+</div>
