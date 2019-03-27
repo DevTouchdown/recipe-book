@@ -11,6 +11,7 @@ import { RecipesService } from 'src/app/core/services/recipes.service';
 export class RecipesComponent implements OnInit {
   recipe: string;
   recipes: Array<Recipe> = [];
+  waitForUserToStopTyping: any;
 
   constructor(private recipeService: RecipesService) { }
 
@@ -29,12 +30,14 @@ export class RecipesComponent implements OnInit {
   }
 
   searchRecipes(recipe: string): void {
-    if (recipe && recipe.trim().length > 2) {
-      this.recipe = recipe;
-      this.loadRecipes();
-    } else {
-      this.recipes = [];
-    }
+    clearTimeout(this.waitForUserToStopTyping);
+    this.waitForUserToStopTyping = setTimeout(() => {
+      if (recipe && recipe.trim().length > 2) {
+        this.recipe = recipe;
+        this.loadRecipes();
+      } else {
+        this.recipes = [];
+      }
+    }, 250);
   }
-
 }
